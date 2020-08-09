@@ -19,6 +19,7 @@ class AlbumCell: UITableViewCell {
         name.translatesAutoresizingMaskIntoConstraints = false
         artist.translatesAutoresizingMaskIntoConstraints = false
         art.translatesAutoresizingMaskIntoConstraints = false
+        art.contentMode = .scaleAspectFill
         contentView.addSubview(name)
         contentView.addSubview(artist)
         contentView.addSubview(art)

@@ -15,6 +15,7 @@
 		9A21A70824DFB2C300A060EE /* AlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A70724DFB2C300A060EE /* AlbumListViewController.swift */; };
 		9A21A70C24DFB44700A060EE /* AlbumConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A70B24DFB44700A060EE /* AlbumConstants.swift */; };
 		9A21A71024DFD87A00A060EE /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A70F24DFD87A00A060EE /* AlbumCell.swift */; };
+		9A21A71524E09DA800A060EE /* AlbumListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		9A21A70724DFB2C300A060EE /* AlbumListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListViewController.swift; sourceTree = "<group>"; };
 		9A21A70B24DFB44700A060EE /* AlbumConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumConstants.swift; sourceTree = "<group>"; };
 		9A21A70F24DFD87A00A060EE /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
+		9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,10 +102,11 @@
 			isa = PBXGroup;
 			children = (
 				9A21A6D224DF603500A060EE /* AppDelegate.swift */,
-				9A21A71124DFD87E00A060EE /* Cells */,
 				9A21A70E24DFB5FF00A060EE /* View Controllers */,
-				9A21A70D24DFB4CE00A060EE /* Constants */,
+				9A21A71624E09DAC00A060EE /* View Models */,
+				9A21A71124DFD87E00A060EE /* Cells */,
 				9A21A70424DFA30800A060EE /* Models */,
+				9A21A70D24DFB4CE00A060EE /* Constants */,
 				9A21A6D824DF603E00A060EE /* Assets.xcassets */,
 				9A21A6E024DF603E00A060EE /* Info.plist */,
 			);
@@ -158,6 +161,14 @@
 				9A21A70F24DFD87A00A060EE /* AlbumCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		9A21A71624E09DAC00A060EE /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,6 +302,7 @@
 			files = (
 				9A21A70C24DFB44700A060EE /* AlbumConstants.swift in Sources */,
 				9A21A70824DFB2C300A060EE /* AlbumListViewController.swift in Sources */,
+				9A21A71524E09DA800A060EE /* AlbumListViewModel.swift in Sources */,
 				9A21A71024DFD87A00A060EE /* AlbumCell.swift in Sources */,
 				9A21A6D324DF603500A060EE /* AppDelegate.swift in Sources */,
 				9A21A70324DFA02800A060EE /* Album.swift in Sources */,

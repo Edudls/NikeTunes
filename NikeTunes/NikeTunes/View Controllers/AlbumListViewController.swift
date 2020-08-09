@@ -10,32 +10,48 @@ import UIKit
 
 class AlbumListViewController: UIViewController {
     var tableView = UITableView()
+    let viewModel = AlbumListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Hot Albums"
-        self.setupTableView()
+        setupNavigationBar()
+        setupTableView()
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(AlbumCell.self, forCellReuseIdentifier: "cell")
         view.addSubview(tableView)
+        loadData()
     }
     
-    func getData() {
-        guard let url = AlbumConstants.albumsUrl else { return }
-        let task = URLSession.shared.dataTask(with: url) { (data, res, err) in
-            if let error = err {
-                print(error.localizedDescription)
-                return
+    private func setupNavigationBar() {
+        self.title = "Hot Albums"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(loadData))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: viewModel.leftButtonText,
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(toggleExplicit))
+    }
+    
+    @objc func loadData() {
+        viewModel.getData { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
             }
-            
         }
-        task.resume()
+    }
+    
+    @objc func toggleExplicit() {
+        viewModel.shouldShowExplicit = !viewModel.shouldShowExplicit
+        setupNavigationBar()
+        loadData()
     }
 }
 
@@ -45,7 +61,7 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return viewModel.albums.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -56,8 +72,14 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AlbumCell else {
             return UITableViewCell()
         }
-        cell.name.text = "Album title"
-        cell.artist.text = "Artist"
+        let album = viewModel.albums[indexPath.row]
+        cell.name.text = album.name
+        cell.artist.text = album.artistName
+        viewModel.getImage(imageUrl: URL(string: album.artworkUrl), handler: { image in
+            DispatchQueue.main.async {
+                cell.art.image = image
+            }
+        })
         return cell
     }
 }
