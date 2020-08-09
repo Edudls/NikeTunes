@@ -6,10 +6,15 @@ iOS Code Sample:
 Create a sample iPhone app that displays the top 100 albums across all genres using Apple’s RSS generator found here: https://rss.itunes.apple.com/en-us .
 
 The app should: 
+
 	•	use Auto Layout
+	
 	•	NOT use storyboards or nibs
+	
 	•	NOT use any third party libraries
+	
 	•	NOT use force unwrapping.
+	
 	•	Have complete Unit Test
 
 Expected behavior:
