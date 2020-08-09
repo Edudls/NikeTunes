@@ -19,10 +19,13 @@ Provide your application via a link to a public Git repo (GitHub, Gitorious, etc
 
 
 Frequently Asked Questions and Answers:
+
 1. What should be the results limit on the RSS Feed generator? 10, 100, or somewhere in between?
 Up to you. 100 is fine.
- 2. The button on the detail view controller should be "horizontally centered". Given that the button also must be 20 points from the bottom, do you mean that it should be vertically centered?
+
+2. The button on the detail view controller should be "horizontally centered". Given that the button also must be 20 points from the bottom, do you mean that it should be vertically centered?
 No. It should be horizontally centered between the left and right edges. 20 points from the bottom specifies its vertical positioning.
- 3. Can the app stay in portrait mode or should it also rotate to landscape mode? This doesn't matter for the table view controller, but it may matter for the detail view controller.
+
+3. Can the app stay in portrait mode or should it also rotate to landscape mode? This doesn't matter for the table view controller, but it may matter for the detail view controller.
  Up to you. Landscape is not required.
 
