@@ -17,7 +17,6 @@
 		9A21A71024DFD87A00A060EE /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A70F24DFD87A00A060EE /* AlbumCell.swift */; };
 		9A21A71524E09DA800A060EE /* AlbumListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */; };
 		9A21A71824E0AE5700A060EE /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A71724E0AE5700A060EE /* AlbumDetailViewController.swift */; };
-		9A21A71D24E0BF2600A060EE /* AlbumDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A71C24E0BF2600A060EE /* AlbumDetailViewModel.swift */; };
 		9AACE2EE24E1E77900CDD4D7 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AACE2ED24E1E77900CDD4D7 /* UILabelExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +54,6 @@
 		9A21A70F24DFD87A00A060EE /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListViewModel.swift; sourceTree = "<group>"; };
 		9A21A71724E0AE5700A060EE /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
-		9A21A71C24E0BF2600A060EE /* AlbumDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewModel.swift; sourceTree = "<group>"; };
 		9AACE2ED24E1E77900CDD4D7 /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */,
-				9A21A71C24E0BF2600A060EE /* AlbumDetailViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -322,7 +319,6 @@
 				9A21A71524E09DA800A060EE /* AlbumListViewModel.swift in Sources */,
 				9A21A71024DFD87A00A060EE /* AlbumCell.swift in Sources */,
 				9A21A71824E0AE5700A060EE /* AlbumDetailViewController.swift in Sources */,
-				9A21A71D24E0BF2600A060EE /* AlbumDetailViewModel.swift in Sources */,
 				9A21A6D324DF603500A060EE /* AppDelegate.swift in Sources */,
 				9AACE2EE24E1E77900CDD4D7 /* UILabelExtension.swift in Sources */,
 				9A21A70324DFA02800A060EE /* Album.swift in Sources */,
