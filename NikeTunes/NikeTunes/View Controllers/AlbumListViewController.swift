@@ -75,11 +75,19 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
         let album = viewModel.albums[indexPath.row]
         cell.name.text = album.name
         cell.artist.text = album.artistName
-        viewModel.getImage(imageUrl: URL(string: album.artworkUrl), handler: { image in
-            DispatchQueue.main.async {
-                cell.art.image = image
-            }
-        })
+        if let artUrl = album.artworkUrl {
+            viewModel.getImage(imageUrl: URL(string: artUrl), handler: { image in
+                DispatchQueue.main.async {
+                    cell.art.image = image
+                }
+            })
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = AlbumDetailViewController()
+        vc.viewModel.album = viewModel.albums[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

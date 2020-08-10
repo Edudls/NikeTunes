@@ -16,6 +16,8 @@
 		9A21A70C24DFB44700A060EE /* AlbumConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A70B24DFB44700A060EE /* AlbumConstants.swift */; };
 		9A21A71024DFD87A00A060EE /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A70F24DFD87A00A060EE /* AlbumCell.swift */; };
 		9A21A71524E09DA800A060EE /* AlbumListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */; };
+		9A21A71824E0AE5700A060EE /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A71724E0AE5700A060EE /* AlbumDetailViewController.swift */; };
+		9A21A71D24E0BF2600A060EE /* AlbumDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A71C24E0BF2600A060EE /* AlbumDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		9A21A70B24DFB44700A060EE /* AlbumConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumConstants.swift; sourceTree = "<group>"; };
 		9A21A70F24DFD87A00A060EE /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListViewModel.swift; sourceTree = "<group>"; };
+		9A21A71724E0AE5700A060EE /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
+		9A21A71C24E0BF2600A060EE /* AlbumDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				9A21A70724DFB2C300A060EE /* AlbumListViewController.swift */,
+				9A21A71724E0AE5700A060EE /* AlbumDetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */,
+				9A21A71C24E0BF2600A060EE /* AlbumDetailViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -304,6 +310,8 @@
 				9A21A70824DFB2C300A060EE /* AlbumListViewController.swift in Sources */,
 				9A21A71524E09DA800A060EE /* AlbumListViewModel.swift in Sources */,
 				9A21A71024DFD87A00A060EE /* AlbumCell.swift in Sources */,
+				9A21A71824E0AE5700A060EE /* AlbumDetailViewController.swift in Sources */,
+				9A21A71D24E0BF2600A060EE /* AlbumDetailViewModel.swift in Sources */,
 				9A21A6D324DF603500A060EE /* AppDelegate.swift in Sources */,
 				9A21A70324DFA02800A060EE /* Album.swift in Sources */,
 			);
@@ -391,7 +399,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -445,7 +453,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -461,6 +469,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = A2SG75YUK4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = NikeTunes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -480,6 +489,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = A2SG75YUK4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = NikeTunes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

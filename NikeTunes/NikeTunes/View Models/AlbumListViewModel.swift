@@ -29,7 +29,7 @@ class AlbumListViewModel {
                     let decoder = JSONDecoder()
                     let results = try decoder.decode(AlbumFeed.self, from: jsonData)
                     print(results)
-                    self?.albums = results.feed.results
+                    self?.albums = results.feed?.results ?? []
                 } catch {
                     print(error)
                 }
