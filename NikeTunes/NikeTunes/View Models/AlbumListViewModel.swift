@@ -38,18 +38,19 @@ class AlbumListViewModel {
         do {
             let decoder = JSONDecoder()
             let results = try decoder.decode(AlbumFeed.self, from: data)
-            print(results)
             albums = results.feed?.results ?? []
         } catch {
             print(error)
         }
     }
     
-    func getImage(imageUrl: URL?, handler: @escaping (UIImage) -> Void) {
+    func getImage(imageUrlString: String, handler: @escaping (UIImage?) -> Void) {
+        let imageUrl = URL(string: imageUrlString.replacingOccurrences(of: "200x200bb", with: "300x300bb"))
         guard let url = imageUrl else { return }
         let task = URLSession.shared.dataTask(with: url) { (data, _, err) in
             if let error = err {
                 print(error.localizedDescription)
+                handler(nil)
                 return
             }
             if let imageData = data, let image = UIImage(data: imageData) {
