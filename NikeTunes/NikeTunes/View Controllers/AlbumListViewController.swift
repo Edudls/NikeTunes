@@ -65,7 +65,7 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 110
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,7 +76,7 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.name.text = album.name
         cell.artist.text = album.artistName
         if let artUrl = album.artworkUrl {
-            viewModel.getImage(imageUrl: URL(string: artUrl), handler: { image in
+            viewModel.getImage(imageUrlString: artUrl, handler: { image in
                 DispatchQueue.main.async {
                     cell.art.image = image
                 }
@@ -87,7 +87,20 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = AlbumDetailViewController()
-        vc.viewModel.album = viewModel.albums[indexPath.row]
+        let album = viewModel.albums[indexPath.row]
+        vc.album = album
+        //cleaner to set the image here since I can easily access the getImage method from this VC if I need to
+        if let cell = tableView.cellForRow(at: indexPath) as? AlbumCell, let image = cell.art.image {
+            //set the image from the cache if available
+            vc.art.image = image
+        } else if let artUrl = album.artworkUrl {
+            //attempt to retrieve the image from the URL if not cached
+            viewModel.getImage(imageUrlString: artUrl, handler: { image in
+                DispatchQueue.main.async {
+                    vc.art.image = image
+                }
+            })
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
 }

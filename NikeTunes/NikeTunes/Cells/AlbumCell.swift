@@ -20,6 +20,8 @@ class AlbumCell: UITableViewCell {
         artist.translatesAutoresizingMaskIntoConstraints = false
         art.translatesAutoresizingMaskIntoConstraints = false
         art.contentMode = .scaleAspectFill
+        name.numberOfLines = 0
+        artist.numberOfLines = 0
         contentView.addSubview(name)
         contentView.addSubview(artist)
         contentView.addSubview(art)
@@ -27,8 +29,8 @@ class AlbumCell: UITableViewCell {
         let constraints = [
             art.heightAnchor.constraint(equalToConstant: 100),
             art.widthAnchor.constraint(equalToConstant: 100),
-            art.topAnchor.constraint(equalTo: self.topAnchor),
-            art.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            art.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            art.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
             name.topAnchor.constraint(equalTo: self.topAnchor),
             name.leadingAnchor.constraint(equalTo: art.trailingAnchor, constant: 10),
             name.trailingAnchor.constraint(equalTo: self.trailingAnchor),

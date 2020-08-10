@@ -9,7 +9,7 @@
 import UIKit
 
 class AlbumDetailViewController: UIViewController {
-    let viewModel = AlbumDetailViewModel()
+    var album: Album?
     
     let name = UILabel()
     let artist = UILabel()
@@ -39,7 +39,7 @@ class AlbumDetailViewController: UIViewController {
         genres.textColor = .black
         storeLink.setTitleColor(.systemBlue, for: .normal)
         edgesForExtendedLayout = []
-        guard let album = viewModel.album else { return }
+        guard let album = album else { return }
         
         title = album.name
         name.text = album.name
@@ -55,16 +55,10 @@ class AlbumDetailViewController: UIViewController {
                 genres.text?.append(", \(name)")
             }
         }
-        guard let artUrlString = album.artworkUrl?.replacingOccurrences(of: "200x200bb", with: "300x300bb") else { return }
-        viewModel.getImage(imageUrl: URL(string: artUrlString), handler: { image in
-            DispatchQueue.main.async { [weak self] in
-                self?.art.image = image
-            }
-        })
     }
     
     @objc func appleMusicButtonAction() {
-        guard let urlString = viewModel.album?.storeUrl, let url = URL(string: urlString) else {
+        guard let urlString = album?.storeUrl, let url = URL(string: urlString) else {
             print("Invalid Apple Music URL")
             return
         }

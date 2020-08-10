@@ -31,8 +31,7 @@ class NikeTunesTests: XCTestCase {
         let genres = [Genre(name: "album"), Genre(name: "music")]
         //set artwork url to nil so we don't actually attempt to retrieve an image from an API, which exceeds the scope of this test
         let album = Album(artistName: "dude", releaseDate: "whenever", name: "songs", copyright: "owned", artworkUrl: nil, genres: genres, storeUrl: "music.com")
-        vc.viewModel.album = album
-        vc.buildUI()
+        vc.album = album
         XCTAssertEqual(vc.title, "songs")
         XCTAssertEqual(vc.artist.text, "dude")
         XCTAssertEqual(vc.releaseDate.text, "Released whenever")
@@ -40,6 +39,7 @@ class NikeTunesTests: XCTestCase {
         XCTAssertEqual(vc.copyright.text, "owned")
         XCTAssertEqual(vc.genres.text, "album, music")
         XCTAssertEqual(vc.storeLink.titleLabel?.text, "Open in Apple Music")
+        vc.album = nil
     }
     
     func testAlbumListDecodeJsonData() {
