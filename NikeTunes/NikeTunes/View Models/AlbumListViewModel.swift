@@ -14,9 +14,11 @@ class AlbumListViewModel {
     var leftButtonText: String {
         return shouldShowExplicit ? "Hide Explicit" : "Show Explicit"
     }
+    var albumsUrl: URL? {
+        return shouldShowExplicit ? AlbumConstants.explicitUrl : AlbumConstants.albumsUrl
+    }
     
     func getData(handler: @escaping () -> Void) {
-        let albumsUrl = shouldShowExplicit ? AlbumConstants.explicitUrl : AlbumConstants.albumsUrl
         guard let url = albumsUrl else { return }
         let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, err) in
             if let error = err {
@@ -25,18 +27,22 @@ class AlbumListViewModel {
                 return
             }
             if let jsonData = data {
-                do {
-                    let decoder = JSONDecoder()
-                    let results = try decoder.decode(AlbumFeed.self, from: jsonData)
-                    print(results)
-                    self?.albums = results.feed?.results ?? []
-                } catch {
-                    print(error)
-                }
+                self?.decodeJsonToAlbums(data: jsonData)
             }
             handler()
         }
         task.resume()
+    }
+    
+    func decodeJsonToAlbums(data: Data) {
+        do {
+            let decoder = JSONDecoder()
+            let results = try decoder.decode(AlbumFeed.self, from: data)
+            print(results)
+            albums = results.feed?.results ?? []
+        } catch {
+            print(error)
+        }
     }
     
     func getImage(imageUrl: URL?, handler: @escaping (UIImage) -> Void) {

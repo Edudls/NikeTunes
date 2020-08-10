@@ -31,6 +31,13 @@ class AlbumDetailViewController: UIViewController {
     }
     
     func buildUI() {
+        view.backgroundColor = .white
+        name.textColor = .black
+        artist.textColor = .black
+        releaseDate.textColor = .black
+        copyright.textColor = .black
+        genres.textColor = .black
+        storeLink.setTitleColor(.systemBlue, for: .normal)
         edgesForExtendedLayout = []
         guard let album = viewModel.album else { return }
         
@@ -40,7 +47,6 @@ class AlbumDetailViewController: UIViewController {
         releaseDate.text = "Released \(album.releaseDate ?? "on unknown date")"
         copyright.text = album.copyright
         storeLink.setTitle("Open in Apple Music", for: .normal)
-        storeLink.setTitleColor(.systemBlue, for: .normal)
         storeLink.addTarget(self, action: #selector(appleMusicButtonAction), for: .touchUpInside)
         for genre in album.genres ?? [] {
             if genres.text == nil {
