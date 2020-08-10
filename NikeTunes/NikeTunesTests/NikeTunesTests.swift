@@ -28,10 +28,9 @@ class NikeTunesTests: XCTestCase {
     
     func testAlbumDetailBuildUI() {
         let vc = AlbumDetailViewController()
-        let genres = [Genre(name: "album"), Genre(name: "music")]
         //set artwork url to nil so we don't actually attempt to retrieve an image from an API, which exceeds the scope of this test
-        let album = Album(artistName: "dude", releaseDate: "whenever", name: "songs", copyright: "owned", artworkUrl: nil, genres: genres, storeUrl: "music.com")
-        vc.album = album
+        vc.album = Album(artistName: "dude", releaseDate: "whenever", name: "songs", copyright: "owned", artworkUrl: nil, genres: [Genre(name: "album"), Genre(name: "music")], storeUrl: "music.com")
+        vc.buildUI()
         XCTAssertEqual(vc.title, "songs")
         XCTAssertEqual(vc.artist.text, "dude")
         XCTAssertEqual(vc.releaseDate.text, "Released whenever")

@@ -18,6 +18,7 @@
 		9A21A71524E09DA800A060EE /* AlbumListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */; };
 		9A21A71824E0AE5700A060EE /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A71724E0AE5700A060EE /* AlbumDetailViewController.swift */; };
 		9A21A71D24E0BF2600A060EE /* AlbumDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A21A71C24E0BF2600A060EE /* AlbumDetailViewModel.swift */; };
+		9AACE2EE24E1E77900CDD4D7 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AACE2ED24E1E77900CDD4D7 /* UILabelExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		9A21A71424E09DA800A060EE /* AlbumListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListViewModel.swift; sourceTree = "<group>"; };
 		9A21A71724E0AE5700A060EE /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
 		9A21A71C24E0BF2600A060EE /* AlbumDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewModel.swift; sourceTree = "<group>"; };
+		9AACE2ED24E1E77900CDD4D7 /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				9A21A6D224DF603500A060EE /* AppDelegate.swift */,
+				9AACE2EF24E1E7AF00CDD4D7 /* Extension */,
 				9A21A70E24DFB5FF00A060EE /* View Controllers */,
 				9A21A71624E09DAC00A060EE /* View Models */,
 				9A21A71124DFD87E00A060EE /* Cells */,
@@ -175,6 +178,14 @@
 				9A21A71C24E0BF2600A060EE /* AlbumDetailViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		9AACE2EF24E1E7AF00CDD4D7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9AACE2ED24E1E77900CDD4D7 /* UILabelExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +324,7 @@
 				9A21A71824E0AE5700A060EE /* AlbumDetailViewController.swift in Sources */,
 				9A21A71D24E0BF2600A060EE /* AlbumDetailViewModel.swift in Sources */,
 				9A21A6D324DF603500A060EE /* AppDelegate.swift in Sources */,
+				9AACE2EE24E1E77900CDD4D7 /* UILabelExtension.swift in Sources */,
 				9A21A70324DFA02800A060EE /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

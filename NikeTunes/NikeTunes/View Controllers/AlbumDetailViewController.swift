@@ -11,50 +11,45 @@ import UIKit
 class AlbumDetailViewController: UIViewController {
     var album: Album?
     
-    let name = UILabel()
-    let artist = UILabel()
-    let art = UIImageView()
-    let releaseDate = UILabel()
-    let copyright = UILabel()
-    let genres = UILabel()
-    let storeLink = UIButton()
+    let name: UILabel = {
+        let label = UILabel(alignment: .center, textColor: .black)
+        return label
+    }()
+    let artist: UILabel = {
+        let label = UILabel(alignment: .center, textColor: .black)
+        return label
+    }()
+    let releaseDate: UILabel = {
+        let label = UILabel(alignment: .center, textColor: .black)
+        return label
+    }()
+    let copyright: UILabel = {
+        let label = UILabel(alignment: .center, textColor: .black, font: 10)
+        return label
+    }()
+    let genres: UILabel = {
+        let label = UILabel(alignment: .center, textColor: .black)
+        return label
+    }()
+    let art: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    let storeLink: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitle("Open in Apple Music", for: .normal)
+        button.addTarget(self, action: #selector(appleMusicButtonAction), for: .touchUpInside)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         buildUI()
         setupConstraints()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupConstraints()
-    }
-    
-    func buildUI() {
-        view.backgroundColor = .white
-        name.textColor = .black
-        artist.textColor = .black
-        releaseDate.textColor = .black
-        copyright.textColor = .black
-        genres.textColor = .black
-        storeLink.setTitleColor(.systemBlue, for: .normal)
-        edgesForExtendedLayout = []
-        guard let album = album else { return }
-        
-        title = album.name
-        name.text = album.name
-        artist.text = album.artistName
-        releaseDate.text = "Released \(album.releaseDate ?? "on unknown date")"
-        copyright.text = album.copyright
-        storeLink.setTitle("Open in Apple Music", for: .normal)
-        storeLink.addTarget(self, action: #selector(appleMusicButtonAction), for: .touchUpInside)
-        for genre in album.genres ?? [] {
-            if genres.text == nil {
-                genres.text = genre.name
-            } else if let name = genre.name{
-                genres.text?.append(", \(name)")
-            }
-        }
     }
     
     @objc func appleMusicButtonAction() {
@@ -65,21 +60,29 @@ class AlbumDetailViewController: UIViewController {
         UIApplication.shared.open(url)
     }
     
+    func buildUI() {
+        view.backgroundColor = .white
+        
+        edgesForExtendedLayout = []
+        guard let album = album else { return }
+        
+        title = album.name
+        name.text = album.name
+        artist.text = album.artistName
+        releaseDate.text = "Released \(album.releaseDate ?? "on unknown date")"
+        copyright.text = album.copyright
+        genres.text = nil //make sure if buildUI is somehow called multiple times that the genres don't get appended over again
+        for genre in album.genres ?? [] {
+            if genres.text == nil {
+                genres.text = genre.name
+            } else if let name = genre.name{
+                genres.text?.append(", \(name)")
+            }
+        }
+    }
+    
     private func setupConstraints() {
-        art.translatesAutoresizingMaskIntoConstraints = false
-        name.translatesAutoresizingMaskIntoConstraints = false
-        artist.translatesAutoresizingMaskIntoConstraints = false
-        releaseDate.translatesAutoresizingMaskIntoConstraints = false
-        copyright.translatesAutoresizingMaskIntoConstraints = false
-        genres.translatesAutoresizingMaskIntoConstraints = false
-        storeLink.translatesAutoresizingMaskIntoConstraints = false
-        name.numberOfLines = 0
-        name.textAlignment = .center
-        copyright.numberOfLines = 0
-        copyright.textAlignment = .center
-        copyright.font = copyright.font.withSize(10)
-        genres.numberOfLines = 0
-        genres.textAlignment = .center
+        
         view.addSubview(art)
         view.addSubview(name)
         view.addSubview(artist)
