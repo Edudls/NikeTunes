@@ -9,7 +9,11 @@
 import UIKit
 
 class AlbumListViewController: UIViewController {
-    var tableView = UITableView()
+    var tableView: UITableView = {
+        let table = UITableView(frame: .zero)
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
+    }()
     let viewModel = AlbumListViewModel()
     
     override func viewDidLoad() {
@@ -17,15 +21,23 @@ class AlbumListViewController: UIViewController {
         
         setupNavigationBar()
         setupTableView()
+        loadData()
     }
     
     private func setupTableView() {
-        tableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(AlbumCell.self, forCellReuseIdentifier: "cell")
         view.addSubview(tableView)
-        loadData()
+        
+        // Constaints
+        let constraints = [
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func setupNavigationBar() {
@@ -64,10 +76,6 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
         return viewModel.albums.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AlbumCell else {
             return UITableViewCell()
@@ -102,5 +110,6 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
             })
         }
         navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

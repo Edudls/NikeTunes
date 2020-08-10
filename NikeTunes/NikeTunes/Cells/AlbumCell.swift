@@ -9,34 +9,48 @@
 import UIKit
 
 class AlbumCell: UITableViewCell {
-    let name = UILabel()
-    let artist = UILabel()
-    let art = UIImageView()
+    let name: UILabel = {
+        let label = UILabel(alignment: .left)
+        return label
+    }()
+    let artist: UILabel = {
+        let label = UILabel(alignment: .left)
+        return label
+    }()
+    let art: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        name.translatesAutoresizingMaskIntoConstraints = false
-        artist.translatesAutoresizingMaskIntoConstraints = false
-        art.translatesAutoresizingMaskIntoConstraints = false
-        art.contentMode = .scaleAspectFill
-        name.numberOfLines = 0
-        artist.numberOfLines = 0
-        contentView.addSubview(name)
-        contentView.addSubview(artist)
-        contentView.addSubview(art)
+        // StackView
+        let stackView = UIStackView(frame: .zero)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
         
+        stackView.addArrangedSubview(name)
+        stackView.addArrangedSubview(artist)
+        
+        // Add SubView
+        contentView.addSubview(art)
+        contentView.addSubview(stackView)
+        
+        // Constraints
         let constraints = [
-            art.heightAnchor.constraint(equalToConstant: 100),
-            art.widthAnchor.constraint(equalToConstant: 100),
-            art.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            art.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-            name.topAnchor.constraint(equalTo: self.topAnchor),
-            name.leadingAnchor.constraint(equalTo: art.trailingAnchor, constant: 10),
-            name.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            artist.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 20),
-            artist.leadingAnchor.constraint(equalTo: art.trailingAnchor, constant: 10),
-            artist.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            art.heightAnchor.constraint(equalToConstant: 120),
+            art.widthAnchor.constraint(equalToConstant: 120),
+            art.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            art.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            art.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            stackView.leadingAnchor.constraint(equalTo: art.trailingAnchor, constant: 10)
         ]
         NSLayoutConstraint.activate(constraints)
     }
