@@ -9,7 +9,7 @@
 import UIKit
 
 class AlbumDetailViewController: UIViewController {
-    var album: Album?
+    var cellIndex: Int = 0
     weak var viewModel: AlbumListViewModel?
     
     let name: UILabel = {
@@ -54,7 +54,7 @@ class AlbumDetailViewController: UIViewController {
     }
     
     @objc func appleMusicButtonAction() {
-        guard let urlString = album?.storeUrl, let url = URL(string: urlString) else {
+        guard let urlString = viewModel?.albums[cellIndex].storeUrl, let url = URL(string: urlString) else {
             print("Invalid Apple Music URL")
             return
         }
@@ -65,7 +65,7 @@ class AlbumDetailViewController: UIViewController {
         view.backgroundColor = .white
         
         edgesForExtendedLayout = []
-        guard let album = album else { return }
+        guard let album = viewModel?.albums[cellIndex] else { return }
         
         title = album.name
         name.text = album.name

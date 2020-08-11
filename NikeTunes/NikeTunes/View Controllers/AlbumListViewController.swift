@@ -95,8 +95,7 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = AlbumDetailViewController()
-        let album = viewModel.albums[indexPath.row]
-        vc.album = album
+        vc.cellIndex = indexPath.row
         vc.viewModel = viewModel
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)

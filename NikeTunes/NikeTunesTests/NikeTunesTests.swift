@@ -30,8 +30,9 @@ class NikeTunesTests: XCTestCase {
         let vc = AlbumDetailViewController()
         let vm = AlbumListViewModel()
         vc.viewModel = vm
-        //set artwork url to nil since an image isn't set as part of this method anyway
-        vc.album = Album(artistName: "dude", releaseDate: "whenever", name: "songs", copyright: "owned", artworkUrl: nil, genres: [Genre(name: "album"), Genre(name: "music")], storeUrl: "music.com")
+        //set artwork url to nil so we don't actually attempt to retrieve an image from an API, which exceeds the scope of this test
+        vc.viewModel?.albums = [Album(artistName: "dude", releaseDate: "whenever", name: "songs", copyright: "owned", artworkUrl: nil, genres: [Genre(name: "album"), Genre(name: "music")], storeUrl: "music.com")]
+        vc.cellIndex = 0 //redundancy
         vc.loadViewIfNeeded()
         XCTAssertEqual(vc.title, "songs")
         XCTAssertEqual(vc.artist.text, "dude")
@@ -40,7 +41,6 @@ class NikeTunesTests: XCTestCase {
         XCTAssertEqual(vc.copyright.text, "owned")
         XCTAssertEqual(vc.genres.text, "album, music")
         XCTAssertEqual(vc.storeLink.titleLabel?.text, "Open in Apple Music")
-        vc.album = nil
         vc.viewModel = nil
     }
     
