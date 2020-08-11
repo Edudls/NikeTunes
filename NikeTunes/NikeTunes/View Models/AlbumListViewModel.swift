@@ -10,6 +10,7 @@ import UIKit
 
 class AlbumListViewModel {
     var albums: [Album] = []
+    var imageCache: [String: UIImage] = [:]
     var shouldShowExplicit: Bool = false
     var leftButtonText: String {
         return shouldShowExplicit ? "Hide Explicit" : "Show Explicit"
@@ -45,15 +46,20 @@ class AlbumListViewModel {
     }
     
     func getImage(imageUrlString: String, handler: @escaping (UIImage?) -> Void) {
+        if let image = imageCache[imageUrlString] {
+            handler(image)
+            return
+        }
         let imageUrl = URL(string: imageUrlString.replacingOccurrences(of: "200x200bb", with: "300x300bb"))
         guard let url = imageUrl else { return }
-        let task = URLSession.shared.dataTask(with: url) { (data, _, err) in
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, err) in
             if let error = err {
                 print(error.localizedDescription)
                 handler(nil)
                 return
             }
             if let imageData = data, let image = UIImage(data: imageData) {
+                self?.imageCache[imageUrlString] = image
                 handler(image)
             }
         }

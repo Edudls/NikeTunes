@@ -98,10 +98,7 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
         let album = viewModel.albums[indexPath.row]
         vc.album = album
         //cleaner to set the image here since I can easily access the getImage method from this VC if I need to
-        if let cell = tableView.cellForRow(at: indexPath) as? AlbumCell, let image = cell.art.image {
-            //set the image from the cache if available
-            vc.art.image = image
-        } else if let artUrl = album.artworkUrl {
+        if let artUrl = album.artworkUrl {
             //attempt to retrieve the image from the URL if not cached
             viewModel.getImage(imageUrlString: artUrl, handler: { image in
                 DispatchQueue.main.async {
