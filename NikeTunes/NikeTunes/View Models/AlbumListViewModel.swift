@@ -10,8 +10,9 @@ import UIKit
 
 class AlbumListViewModel {
     var albums: [Album] = []
-    var imageCache: [String: UIImage] = [:]
+    var imageDictionary: [String: UIImage] = [:]
     var shouldShowExplicit: Bool = false
+    var serviceProvider = ServiceProvider()
     var leftButtonText: String {
         return shouldShowExplicit ? "Hide Explicit" : "Show Explicit"
     }
@@ -20,19 +21,19 @@ class AlbumListViewModel {
     }
     
     func getData(handler: @escaping () -> Void) {
-        guard let url = albumsUrl else { return }
-        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, err) in
-            if let error = err {
-                print(error.localizedDescription)
-                handler()
-                return
-            }
-            if let jsonData = data {
+        guard let url = albumsUrl else {
+            handler()
+            return
+        }
+        
+        serviceProvider.getData(providerURL: url) { [weak self] (result) in
+            if case .success(let jsonData) = result {
                 self?.decodeJsonToAlbums(data: jsonData)
+            } else if case .failure(let error) = result {
+                print(error.localizedDescription)
             }
             handler()
         }
-        task.resume()
     }
     
     func decodeJsonToAlbums(data: Data) {
@@ -46,23 +47,24 @@ class AlbumListViewModel {
     }
     
     func getImage(imageUrlString: String, handler: @escaping (UIImage?) -> Void) {
-        if let image = imageCache[imageUrlString] {
+        
+        if let image = imageDictionary[imageUrlString] {
             handler(image)
             return
         }
+        
         let imageUrl = URL(string: imageUrlString.replacingOccurrences(of: "200x200bb", with: "300x300bb"))
-        guard let url = imageUrl else { return }
-        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, err) in
-            if let error = err {
-                print(error.localizedDescription)
-                handler(nil)
-                return
-            }
-            if let imageData = data, let image = UIImage(data: imageData) {
-                self?.imageCache[imageUrlString] = image
+        guard let url = imageUrl else {
+            handler(nil)
+            return
+        }
+        
+        serviceProvider.getData(providerURL: url) { [weak self] (result) in
+            if case .success(let imageData) = result {
+                let image = UIImage(data: imageData)
+                self?.imageDictionary[imageUrlString] = image
                 handler(image)
             }
         }
-        task.resume()
     }
 }

@@ -28,7 +28,7 @@ class NikeTunesTests: XCTestCase {
     
     func testAlbumDetailBuildUI() {
         let vc = AlbumDetailViewController()
-        //set artwork url to nil so we don't actually attempt to retrieve an image from an API, which exceeds the scope of this test
+        //set artwork url to nil since an image isn't set as part of this method anyway
         vc.album = Album(artistName: "dude", releaseDate: "whenever", name: "songs", copyright: "owned", artworkUrl: nil, genres: [Genre(name: "album"), Genre(name: "music")], storeUrl: "music.com")
         vc.buildUI()
         XCTAssertEqual(vc.title, "songs")
@@ -43,9 +43,13 @@ class NikeTunesTests: XCTestCase {
     
     func testAlbumListDecodeJsonData() {
         let vm = AlbumListViewModel()
-        let jsonData: Data = """
-{"feed":{"title":"Top Albums","id":"https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/2/explicit.json","author":{"name":"iTunes Store","uri":"http://wwww.apple.com/us/itunes/"},"links":[{"self":"https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/2/explicit.json"},{"alternate":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewTop?genreId=34\\u0026popId=82\\u0026app=music"}],"copyright":"Copyright © 2018 Apple Inc. All rights reserved.","country":"us","icon":"http://itunes.apple.com/favicon.ico","updated":"2020-08-09T02:05:07.000-07:00","results":[{"artistName":"Rod Wave","id":"1526631313","releaseDate":"2020-08-07","name":"Pray 4 Love (Deluxe)","kind":"album","artistId":"1140623439","contentAdvisoryRating":"Explicit","artistUrl":"https://music.apple.com/us/artist/rod-wave/1140623439?app=music","artworkUrl100":"https://is4-ssl.mzstatic.com/image/thumb/Music124/v4/fc/b4/b2/fcb4b20a-8d6a-f20a-c587-90b14799a00e/808391092006-cover.jpg/200x200bb.png","genres":[{"genreId":"18","name":"Hip-Hop/Rap","url":"https://itunes.apple.com/us/genre/id18"},{"genreId":"34","name":"Music","url":"https://itunes.apple.com/us/genre/id34"}],"url":"https://music.apple.com/us/album/pray-4-love-deluxe/1526631313?app=music"},{"artistName":"Pop Smoke","id":"1521889004","releaseDate":"2020-07-03","name":"Shoot for the Stars Aim for the Moon","kind":"album","copyright":"Victor Victor Worldwide; ℗ 2020 Republic Records, a division of UMG Recordings, Inc. \\u0026 Victor Victor Worldwide","artistId":"1450601383","contentAdvisoryRating":"Explicit","artistUrl":"https://music.apple.com/us/artist/pop-smoke/1450601383?app=music","artworkUrl100":"https://is3-ssl.mzstatic.com/image/thumb/Music124/v4/17/6d/e0/176de0c9-42a6-8741-9d22-6aae00094e1d/20UMGIM55833.rgb.jpg/200x200bb.png","genres":[{"genreId":"18","name":"Hip-Hop/Rap","url":"https://itunes.apple.com/us/genre/id18"},{"genreId":"34","name":"Music","url":"https://itunes.apple.com/us/genre/id34"}],"url":"https://music.apple.com/us/album/shoot-for-the-stars-aim-for-the-moon/1521889004?app=music"}]}}
-""".data(using: .utf8) ?? Data()
+        guard let path = Bundle(for: NikeTunesTests.self).path(forResource: "MockJson", ofType: "json") else { return }
+        var jsonData = Data()
+        do {
+            jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+        } catch {
+            XCTFail()
+        }
         vm.decodeJsonToAlbums(data: jsonData)
         XCTAssertEqual(vm.albums[1].artistName, "Pop Smoke")
         XCTAssertEqual(vm.albums[1].releaseDate, "2020-07-03")
