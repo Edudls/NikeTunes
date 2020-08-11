@@ -10,6 +10,7 @@ import UIKit
 
 class AlbumDetailViewController: UIViewController {
     var album: Album?
+    weak var viewModel: AlbumListViewModel?
     
     let name: UILabel = {
         let label = UILabel(alignment: .center, textColor: .black)
@@ -69,7 +70,7 @@ class AlbumDetailViewController: UIViewController {
         title = album.name
         name.text = album.name
         artist.text = album.artistName
-        releaseDate.text = "Released \(album.releaseDate ?? "on unknown date")"
+        releaseDate.text = viewModel?.setReleaseDateText(album.releaseDate)
         copyright.text = album.copyright
         genres.text = nil //make sure if buildUI is somehow called multiple times that the genres don't get appended over again
         for genre in album.genres ?? [] {
@@ -78,6 +79,14 @@ class AlbumDetailViewController: UIViewController {
             } else if let name = genre.name{
                 genres.text?.append(", \(name)")
             }
+        }
+        if let artUrl = album.artworkUrl {
+            //attempt to retrieve the image from the URL if not cached
+            viewModel?.getImage(imageUrlString: artUrl, handler: { [weak self] image in
+                DispatchQueue.main.async {
+                    self?.art.image = image
+                }
+            })
         }
     }
     

@@ -17,7 +17,11 @@ class AlbumListViewModel {
         return shouldShowExplicit ? "Hide Explicit" : "Show Explicit"
     }
     var albumsUrl: URL? {
-        return shouldShowExplicit ? AlbumConstants.explicitUrl : AlbumConstants.albumsUrl
+        return shouldShowExplicit ? URL(string: AlbumConstants.explicitUrl.rawValue) : URL(string: AlbumConstants.albumsUrl.rawValue)
+    }
+    
+    func setReleaseDateText(_ releaseDate: String?) -> String {
+        return "Released \(releaseDate ?? "on unknown date")"
     }
     
     func getData(handler: @escaping () -> Void) {

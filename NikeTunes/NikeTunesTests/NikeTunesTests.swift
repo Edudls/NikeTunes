@@ -12,8 +12,8 @@ import XCTest
 class NikeTunesTests: XCTestCase {
     
     func testAlbumConstants() {
-        XCTAssertEqual(AlbumConstants.albumsUrl, URL(string: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/100/non-explicit.json"))
-        XCTAssertEqual(AlbumConstants.explicitUrl, URL(string: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/100/explicit.json"))
+        XCTAssertEqual(URL(string: AlbumConstants.albumsUrl.rawValue), URL(string: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/100/non-explicit.json"))
+        XCTAssertEqual(URL(string: AlbumConstants.explicitUrl.rawValue), URL(string: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/100/explicit.json"))
     }
     
     func testAlbumListShowExplicit() {
@@ -28,9 +28,11 @@ class NikeTunesTests: XCTestCase {
     
     func testAlbumDetailBuildUI() {
         let vc = AlbumDetailViewController()
+        let vm = AlbumListViewModel()
+        vc.viewModel = vm
         //set artwork url to nil since an image isn't set as part of this method anyway
         vc.album = Album(artistName: "dude", releaseDate: "whenever", name: "songs", copyright: "owned", artworkUrl: nil, genres: [Genre(name: "album"), Genre(name: "music")], storeUrl: "music.com")
-        vc.buildUI()
+        vc.loadViewIfNeeded()
         XCTAssertEqual(vc.title, "songs")
         XCTAssertEqual(vc.artist.text, "dude")
         XCTAssertEqual(vc.releaseDate.text, "Released whenever")
@@ -39,6 +41,7 @@ class NikeTunesTests: XCTestCase {
         XCTAssertEqual(vc.genres.text, "album, music")
         XCTAssertEqual(vc.storeLink.titleLabel?.text, "Open in Apple Music")
         vc.album = nil
+        vc.viewModel = nil
     }
     
     func testAlbumListDecodeJsonData() {

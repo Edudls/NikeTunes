@@ -61,7 +61,7 @@ class AlbumListViewController: UIViewController {
     }
     
     @objc func toggleExplicit() {
-        viewModel.shouldShowExplicit = !viewModel.shouldShowExplicit
+        viewModel.shouldShowExplicit.toggle()
         setupNavigationBar()
         loadData()
     }
@@ -97,15 +97,7 @@ extension AlbumListViewController: UITableViewDataSource, UITableViewDelegate {
         let vc = AlbumDetailViewController()
         let album = viewModel.albums[indexPath.row]
         vc.album = album
-        //cleaner to set the image here since I can easily access the getImage method from this VC if I need to
-        if let artUrl = album.artworkUrl {
-            //attempt to retrieve the image from the URL if not cached
-            viewModel.getImage(imageUrlString: artUrl, handler: { image in
-                DispatchQueue.main.async {
-                    vc.art.image = image
-                }
-            })
-        }
+        vc.viewModel = viewModel
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

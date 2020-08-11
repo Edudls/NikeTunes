@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Result {
+enum CallResult {
     case success(Data)
     case failure(Error)
     case unknown
@@ -16,7 +16,7 @@ enum Result {
 
 class ServiceProvider {
     
-    func getData(providerURL: URL, handler: @escaping (Result) -> Void) {
+    func getData(providerURL: URL, handler: @escaping (CallResult) -> Void) {
         let task = URLSession.shared.dataTask(with: providerURL) { (data, _, err) in
             if let error = err {
                 handler(.failure(error))
